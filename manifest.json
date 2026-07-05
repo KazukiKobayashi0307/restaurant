@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "のれん承 ─ 外食チェーン経営記",
+  "short_name": "のれん承",
+  "description": "30歳で開いた一軒の店から40年、暖簾をどこまで広げられるか。会計・マクロ経済・住民ペルソナ需要モデルを備えた外食チェーン経営シミュレーション。",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#15181d",
+  "theme_color": "#15181d",
+  "lang": "ja",
+  "dir": "ltr",
+  "categories": ["games", "simulation", "business"],
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon-maskable.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}
