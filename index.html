@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>のれん承 ─ 外食チェーン経営記</title>
 <meta name="description" content="30歳で開いた一軒の店から40年、暖簾をどこまで広げられるか。会計・マクロ経済・住民ペルソナ需要モデルを備えた外食チェーン経営シミュレーション。">
-<meta name="theme-color" content="#15181d">
+<meta name="theme-color" content="#14171b">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon.svg">
@@ -18,81 +18,72 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#15181d; --ink2:#1c2027; --panel:#f4ede0; --panel2:#ebe1cd;
-  --paper:#faf5ea; --line:#d8ccb2; --line2:#c4b696;
-  --crimson:#9c2a2a; --crimson-bright:#c23b35; --gold:#b8862f; --gold-bright:#d8a83f;
-  --green:#2f6b46; --green-bright:#3f9460; --red:#b23a2e;
-  --txt:#22262d; --txt-dim:#6b6253; --txt-paper:#3a352b;
-  --shadow:0 18px 50px rgba(0,0,0,.45);
+  --ink:#14171b; --ink2:#1a1e23; --panel:#efe9dc; --panel2:#e4dcc9;
+  --paper:#faf7f0; --line:#e7e0d0; --line2:#d6cbb0;
+  --crimson:#a8342a; --crimson-bright:#c94435; --gold:#b8862f; --gold-bright:#d8a83f;
+  --green:#2f8f5b; --green-bright:#3fa873; --red:#c0463a;
+  --txt:#22262d; --txt-dim:#8b8477; --txt-paper:#3a352b;
+  --shadow:0 16px 40px rgba(0,0,0,.4);
+  --radius:16px; --radius-sm:11px;
   --mono:'JetBrains Mono',monospace; --serif:'Shippori Mincho B1',serif; --sans:'Zen Kaku Gothic New',sans-serif;
-  /* 和紙の繊維ノイズ（紙質感）／墨の刷毛罫線（手描き風の区切り線） */
-  --noise-tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.42 0 0 0 0 0.33 0 0 0 0 0.2 0 0 0 0.07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --ink-divider:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8'%3E%3Cpath d='M0 4.5 Q10 1.5 20 4.5 T40 4.2' stroke='%23c4b696' stroke-width='1.3' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  --ink-divider-dark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8'%3E%3Cpath d='M0 4.5 Q10 1.5 20 4.5 T40 4.2' stroke='%239c2a2a' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{
   font-family:var(--sans); color:var(--txt); background:
-    radial-gradient(1200px 600px at 50% -10%, #20242c 0%, transparent 60%),
-    repeating-linear-gradient(0deg,#13161b,#13161b 2px,#14171c 2px,#14171c 4px),
-    var(--ink);
+    radial-gradient(900px 500px at 50% -8%, #1e222a 0%, transparent 65%), var(--ink);
   display:flex; justify-content:center; min-height:100%; overflow-x:hidden;
 }
 .app{
   width:100%; max-width:480px; min-height:100vh; position:relative;
-  background:
-    linear-gradient(180deg,#1a1e25,#15181d);
+  background:linear-gradient(180deg,#181c22,#14171b);
   display:flex; flex-direction:column; box-shadow:var(--shadow);
 }
 /* ---------- Top bar ---------- */
 .topbar{
-  position:sticky; top:0; z-index:40; padding:10px 14px 8px;
-  background:linear-gradient(180deg,#1d2128,#191c22);
-  border-bottom:2px solid var(--crimson);
+  position:sticky; top:0; z-index:40; padding:12px 16px 10px;
+  background:#181c22;
+  border-bottom:1px solid #262b33;
 }
 .brand{display:flex;align-items:baseline;gap:8px}
 .brandrow{display:flex;justify-content:space-between;align-items:center}
-.menubtn{background:#11141a;border:1px solid var(--line2);color:var(--gold-bright);font-family:var(--sans);font-weight:700;
-  font-size:12px;padding:6px 11px;border-radius:8px;letter-spacing:.5px}
-.menubtn:active{background:#0c0e12}
+.menubtn{background:transparent;border:1px solid #333a44;color:var(--gold-bright);font-family:var(--sans);font-weight:700;
+  font-size:12px;padding:6px 12px;border-radius:20px;letter-spacing:.5px}
+.menubtn:active{background:#20242c}
 .noren{
-  font-family:var(--serif); font-weight:800; font-size:22px; color:var(--paper);
-  letter-spacing:2px; position:relative; padding:0 4px;
+  font-family:var(--serif); font-weight:800; font-size:20px; color:#fff;
+  letter-spacing:1.5px; position:relative; padding:0 2px;
 }
 .noren::after{content:"暖簾"; display:none}
 .brand small{color:var(--gold-bright);font-size:11px;letter-spacing:1px;font-family:var(--serif)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);margin-top:10px;background:#11141a;border:1px solid #2a2f38;border-radius:9px;overflow:hidden;position:relative}
-.kpi{padding:7px 5px;text-align:center;position:relative}
-.kpi+.kpi::before{content:"";position:absolute;left:0;top:16%;bottom:16%;width:1px;background:linear-gradient(180deg,transparent,#363d48,transparent)}
-.kpi .lab{font-size:9px;color:#8a8576;letter-spacing:.5px}
-.kpi .val{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--paper);margin-top:2px;line-height:1.1}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);margin-top:11px;background:#1e222a;border-radius:12px;overflow:hidden;position:relative}
+.kpi{padding:9px 5px;text-align:center;position:relative}
+.kpi+.kpi::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:1px;background:#30363f}
+.kpi .lab{font-size:9px;color:#767068;letter-spacing:.3px}
+.kpi .val{font-family:var(--mono);font-size:13.5px;font-weight:700;color:#f2ede2;margin-top:3px;line-height:1.1}
 .kpi .val.g{color:var(--green-bright)} .kpi .val.r{color:#e0695c} .kpi .val.gold{color:var(--gold-bright)}
-.datestrip{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-.datestrip .dt{font-family:var(--mono);font-size:12px;color:#cdbf9b}
-.datestrip .econ{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700}
+.datestrip{display:flex;justify-content:space-between;align-items:center;margin-top:9px}
+.datestrip .dt{font-family:var(--mono);font-size:12px;color:#a8a096}
+.datestrip .econ{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:700}
 /* ---------- Content ---------- */
 .screen{flex:1;overflow-y:auto;padding:14px 14px 96px;background:transparent}
 .card{
-  background:linear-gradient(180deg,var(--paper),var(--panel));
-  border:1px solid var(--line2); border-radius:3px 13px 3px 13px; padding:15px 15px 16px; margin-bottom:13px;
-  box-shadow:0 2px 0 rgba(0,0,0,.22), inset 0 1px 0 #fff, 0 12px 22px -16px rgba(0,0,0,.4);
+  background:var(--paper);
+  border:none; border-radius:var(--radius); padding:16px; margin-bottom:12px;
+  box-shadow:0 1px 2px rgba(30,20,5,.05), 0 10px 24px -16px rgba(30,20,5,.28);
   color:var(--txt-paper);
-  position:relative; isolation:isolate;
+  position:relative;
 }
-.card::before{content:"";position:absolute;inset:0;border-radius:inherit;background-image:var(--noise-tex);opacity:.45;mix-blend-mode:multiply;pointer-events:none}
-.card h2{font-family:var(--serif);font-weight:800;font-size:15.5px;color:var(--ink);display:flex;align-items:center;gap:7px;margin-bottom:11px;
-  padding-bottom:9px;letter-spacing:.3px;
-  background-image:var(--ink-divider);background-repeat:repeat-x;background-position:bottom left;background-size:34px 8px}
+.card h2{font-family:var(--serif);font-weight:800;font-size:15px;color:var(--ink);display:flex;align-items:center;gap:7px;margin-bottom:12px;
+  padding-bottom:10px;letter-spacing:.2px;border-bottom:1px solid var(--line)}
 .card h2 .tag{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--txt-dim);font-weight:400}
-/* 朱印スタンプ（評価・達成バッジ用） */
+/* 評価スタンプ（★評価・達成バッジ用） */
 .hanko{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:44px;padding:0 6px;
-  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.16),transparent 60%),radial-gradient(circle,var(--crimson-bright),var(--crimson) 68%,#6e1d1d 100%);
-  border-radius:50%;color:#fff8ec;font-family:var(--serif);font-weight:800;font-size:12.5px;letter-spacing:.2px;
-  box-shadow:0 3px 9px rgba(0,0,0,.4),inset 0 0 0 1.5px rgba(255,255,255,.22),inset 0 0 11px rgba(0,0,0,.28);
-  transform:rotate(-6deg);position:relative;flex:none}
-.hanko::after{content:"";position:absolute;inset:-1px;border-radius:50%;background-image:var(--noise-tex);mix-blend-mode:overlay;opacity:.4;pointer-events:none}
-.hanko.sm{min-width:34px;height:34px;font-size:10.5px}
+  background:var(--crimson);
+  border-radius:50%;color:#fff;font-family:var(--serif);font-weight:800;font-size:12.5px;letter-spacing:.2px;
+  box-shadow:0 3px 8px rgba(168,52,42,.35);
+  position:relative;flex:none}
+.hanko.sm{min-width:32px;height:32px;font-size:10.5px}
 .row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:13px}
 .row + .row{border-top:1px dotted var(--line)}
 .row .k{color:var(--txt-dim)} .row .v{font-family:var(--mono);font-weight:600}
@@ -105,120 +96,112 @@ table.fs td.num{font-family:var(--mono);text-align:right;font-weight:600}
 table.fs tr.sub td{color:var(--txt-dim);padding-left:12px;font-size:11px}
 table.fs tr.tot td{border-top:2px solid var(--line2);font-weight:800;border-bottom:none;padding-top:6px}
 table.fs tr.head td{font-family:var(--serif);font-weight:700;color:var(--crimson);font-size:12px;padding-top:8px}
-/* store list：店舗ヒーローカード（暖簾×帳簿の一枚札） */
-.store{background:linear-gradient(180deg,var(--paper),var(--panel));border:1px solid var(--line2);border-radius:4px 14px 4px 14px;padding:12px 13px 13px;margin-bottom:12px;position:relative;overflow:hidden;
-  box-shadow:0 2px 0 rgba(0,0,0,.18),inset 0 1px 0 #fff,0 10px 20px -15px rgba(0,0,0,.35)}
-.store::before{content:"";position:absolute;inset:0;background-image:var(--noise-tex);opacity:.4;mix-blend-mode:multiply;pointer-events:none}
-.store>*{position:relative}
-.store .shead{display:flex;gap:10px;align-items:center}
-.store .sicon{flex:none;width:46px;height:46px;border-radius:9px;position:relative;display:flex;align-items:center;justify-content:center;font-size:22px;
-  background:linear-gradient(180deg,#3a1414,#2a0f0f);box-shadow:0 0 0 1.5px var(--crimson-bright),0 4px 10px rgba(156,42,42,.35)}
-.store .sicon::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:0;height:0;
-  border-left:26px solid transparent;border-right:26px solid transparent;border-bottom:11px solid var(--crimson-bright)}
+/* store list：店舗カード（フラット・簡潔） */
+.store{background:var(--paper);border:none;border-radius:var(--radius);padding:14px;margin-bottom:12px;position:relative;
+  box-shadow:0 1px 2px rgba(30,20,5,.05), 0 10px 24px -16px rgba(30,20,5,.28);cursor:pointer}
+.store .shead{display:flex;gap:11px;align-items:center}
+.store .sicon{flex:none;width:44px;height:44px;border-radius:12px;position:relative;display:flex;align-items:center;justify-content:center;font-size:21px;
+  background:var(--ink)}
 .store .nm{font-family:var(--serif);font-weight:800;font-size:15px;color:var(--ink);letter-spacing:.2px}
 .store .loc{font-size:10.5px;color:var(--txt-dim);margin-top:2px}
-.store .badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:10px;background:var(--panel2);color:var(--txt-paper);margin-right:4px;margin-top:5px;border:1px solid var(--line)}
-.spark-row{display:flex;align-items:center;gap:8px;margin:9px 0 8px;padding:7px 9px;background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:8px}
+.store .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;background:var(--panel2);color:var(--txt-paper);margin-right:4px;margin-top:6px}
+.spark-row{display:flex;align-items:center;gap:8px;margin:10px 0 8px;padding:8px 10px;background:var(--panel2);border-radius:var(--radius-sm)}
 .spark-row .spklab{font-size:9.5px;color:var(--txt-dim);flex:none;line-height:1.35}
 .spark-row svg{flex:1;height:28px;width:100%;min-width:0;display:block}
 .spark-row .spkval{flex:none;font-family:var(--mono);font-weight:700;font-size:13px;text-align:right}
 .store .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:2px}
-.store .stat{text-align:center;background:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 2px}
-.store .stat .l{font-size:9px;color:var(--txt-dim)} .store .stat .n{font-family:var(--mono);font-size:13px;font-weight:600;margin-top:1px}
+.store .stat{text-align:center;background:var(--panel2);border-radius:8px;padding:6px 2px}
+.store .stat .l{font-size:9px;color:var(--txt-dim)} .store .stat .n{font-family:var(--mono);font-size:13px;font-weight:700;margin-top:1px}
 /* 店舗詳細：ヒーローヘッダー */
 .storehero{display:flex;gap:12px;align-items:center;margin-bottom:2px}
-.storehero .sicon2{flex:none;width:60px;height:60px;border-radius:11px;position:relative;display:flex;align-items:center;justify-content:center;font-size:28px;
-  background:linear-gradient(180deg,#3a1414,#2a0f0f);box-shadow:0 0 0 2px var(--crimson-bright),0 6px 14px rgba(156,42,42,.4)}
-.storehero .sicon2::before{content:"";position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:0;height:0;
-  border-left:34px solid transparent;border-right:34px solid transparent;border-bottom:14px solid var(--crimson-bright)}
+.storehero .sicon2{flex:none;width:56px;height:56px;border-radius:15px;position:relative;display:flex;align-items:center;justify-content:center;font-size:26px;
+  background:var(--ink)}
 .storehero .htxt h3{margin-bottom:1px}
-.herokpi{display:grid;grid-template-columns:repeat(4,1fr);background:#11141a;border:1px solid #2a2f38;border-radius:9px;margin:11px 0 9px;overflow:hidden}
-.herokpi .hk{padding:7px 3px;text-align:center;position:relative}
-.herokpi .hk+.hk::before{content:"";position:absolute;left:0;top:16%;bottom:16%;width:1px;background:linear-gradient(180deg,transparent,#363d48,transparent)}
-.herokpi .hk .lab{font-size:8.5px;color:#8a8576}
-.herokpi .hk .val{font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--paper);margin-top:2px}
+.herokpi{display:grid;grid-template-columns:repeat(4,1fr);background:#1e222a;border-radius:12px;margin:12px 0 9px;overflow:hidden}
+.herokpi .hk{padding:9px 3px;text-align:center;position:relative}
+.herokpi .hk+.hk::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:1px;background:#30363f}
+.herokpi .hk .lab{font-size:8.5px;color:#767068}
+.herokpi .hk .val{font-family:var(--mono);font-size:12.5px;font-weight:700;color:#f2ede2;margin-top:3px}
 .herokpi .hk .val.g{color:var(--green-bright)}.herokpi .hk .val.r{color:#e0695c}.herokpi .hk .val.gold{color:var(--gold-bright)}
 .bar{height:5px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:4px}
 .bar>i{display:block;height:100%;border-radius:3px}
 /* buttons */
-.btn{display:block;width:100%;border:none;border-radius:10px;padding:13px;font-family:var(--sans);font-weight:700;font-size:14px;
-  cursor:pointer;letter-spacing:.5px;transition:transform .08s,filter .15s}
-.btn:active{transform:scale(.97)}
-.btn.primary{background:linear-gradient(180deg,var(--crimson-bright),var(--crimson));color:#fff;box-shadow:0 4px 0 #6e1d1d}
-.btn.primary:active{box-shadow:0 1px 0 #6e1d1d}
-.btn.gold{background:linear-gradient(180deg,var(--gold-bright),var(--gold));color:#3a2c08;box-shadow:0 4px 0 #8a6418}
-.btn.ghost{background:var(--panel2);color:var(--txt-paper);border:1px solid var(--line2)}
+.btn{display:block;width:100%;border:none;border-radius:var(--radius-sm);padding:13px;font-family:var(--sans);font-weight:700;font-size:14px;
+  cursor:pointer;letter-spacing:.3px;transition:transform .08s,filter .15s,opacity .15s}
+.btn:active{transform:scale(.97);opacity:.9}
+.btn.primary{background:var(--crimson);color:#fff;box-shadow:0 3px 10px rgba(168,52,42,.35)}
+.btn.gold{background:var(--gold-bright);color:#2b2007;box-shadow:0 3px 10px rgba(184,134,47,.3)}
+.btn.ghost{background:var(--panel2);color:var(--txt-paper);border:none}
+.btn.dark{background:var(--ink);color:#f2ede2}
 .btn:disabled{filter:grayscale(.7) opacity(.5);cursor:not-allowed}
 .btn.sm{padding:9px;font-size:12px;border-radius:8px}
 .btngrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 /* action list */
-.act{display:flex;align-items:center;gap:11px;background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px;margin-bottom:9px;cursor:pointer;transition:filter .12s}
-.act:active{filter:brightness(.96)}
-.act .ic{width:38px;height:38px;border-radius:9px;display:grid;place-items:center;font-size:19px;background:var(--panel2);flex:none}
+.act{display:flex;align-items:center;gap:11px;background:var(--paper);border:none;border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;cursor:pointer;transition:opacity .12s;
+  box-shadow:0 1px 2px rgba(30,20,5,.05), 0 8px 18px -14px rgba(30,20,5,.25)}
+.act:active{opacity:.85}
+.act .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:18px;background:var(--panel2);flex:none}
 .act .tx{flex:1} .act .tx .t{font-weight:700;font-size:13.5px;color:var(--ink)} .act .tx .d{font-size:11px;color:var(--txt-dim);margin-top:1px}
-.act .ar{color:var(--gold);font-size:18px}
+.act .ar{color:var(--txt-dim);font-size:16px}
 /* bottom nav */
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;
-  display:grid;grid-template-columns:repeat(5,1fr);background:linear-gradient(180deg,#1d212a,#15181d);
-  border-top:1px solid #2c313b;z-index:45}
-.nav button{background:none;border:none;color:#7e7868;padding:9px 0 11px;font-size:10px;font-family:var(--sans);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;letter-spacing:.5px}
+  display:grid;grid-template-columns:repeat(5,1fr);background:#181c22;
+  border-top:1px solid #262b33;z-index:45}
+.nav button{background:none;border:none;color:#6e6a62;padding:9px 0 11px;font-size:10px;font-family:var(--sans);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;letter-spacing:.3px}
 .nav button .ni{line-height:1}
-.nav button .ni svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block;transition:transform .18s ease}
+.nav button .ni svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;display:block;transition:transform .18s ease}
 .nav button.on{color:var(--gold-bright)}
-.nav button.on .ni svg{filter:drop-shadow(0 0 5px rgba(216,168,63,.65));transform:translateY(-1px)}
 .nav button:active .ni svg{transform:scale(.88)}
 /* advance bar */
 .advance{position:fixed;bottom:60px;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:0 14px;z-index:46;pointer-events:none}
-.advance .btn{pointer-events:auto;box-shadow:0 6px 18px rgba(156,42,42,.5),0 4px 0 #6e1d1d}
+.advance .btn{pointer-events:auto;box-shadow:0 8px 22px rgba(168,52,42,.4)}
 /* modal */
-.modal-bg{position:fixed;inset:0;background:rgba(10,11,14,.72);z-index:250;display:none;align-items:flex-end;justify-content:center}
+.modal-bg{position:fixed;inset:0;background:rgba(10,11,14,.7);z-index:250;display:none;align-items:flex-end;justify-content:center}
 .modal-bg.show{display:flex}
-.modal{width:100%;max-width:480px;background:linear-gradient(180deg,var(--paper),var(--panel));border-radius:18px 18px 0 0;
-  padding:18px 16px 26px;max-height:88vh;overflow-y:auto;animation:up .25s ease;color:var(--txt-paper);border-top:3px solid var(--crimson);position:relative}
-.modal::before{content:"";position:absolute;inset:0;border-radius:inherit;background-image:var(--noise-tex);opacity:.35;mix-blend-mode:multiply;pointer-events:none}
+.modal{width:100%;max-width:480px;background:var(--paper);border-radius:22px 22px 0 0;
+  padding:20px 18px 28px;max-height:88vh;overflow-y:auto;animation:up .25s ease;color:var(--txt-paper);position:relative}
 .modal>*{position:relative}
 @keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal h3{font-family:var(--serif);font-weight:800;font-size:18.5px;color:var(--ink);margin-bottom:5px;display:flex;align-items:center;gap:8px;letter-spacing:.2px}
-.modal .sub{font-size:11px;color:var(--txt-dim);margin-bottom:14px;padding-bottom:10px;
-  background-image:var(--ink-divider);background-repeat:repeat-x;background-position:bottom left;background-size:30px 7px}
-.opt{border:1.5px solid var(--line2);border-radius:11px;padding:12px;margin-bottom:9px;cursor:pointer;background:var(--paper);transition:.12s}
-.opt.sel{border-color:var(--crimson);background:#fff;box-shadow:0 0 0 3px rgba(156,42,42,.12)}
+.modal h3{font-family:var(--serif);font-weight:800;font-size:18px;color:var(--ink);margin-bottom:5px;display:flex;align-items:center;gap:8px;letter-spacing:.2px}
+.modal .sub{font-size:11.5px;color:var(--txt-dim);margin-bottom:15px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.opt{border:1.5px solid transparent;border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;cursor:pointer;background:var(--panel2);transition:.12s}
+.opt.sel{border-color:var(--crimson);background:#fff;box-shadow:0 0 0 2px rgba(168,52,42,.1)}
 .opt .ot{font-weight:700;font-size:14px;color:var(--ink);display:flex;justify-content:space-between;align-items:center}
 .opt .ot .price{font-family:var(--mono);font-size:12px;color:var(--crimson)}
 .opt .od{font-size:11px;color:var(--txt-dim);margin-top:3px;line-height:1.5}
 .opt .ometa{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
-.chip{font-size:10px;padding:2px 7px;border-radius:9px;background:var(--panel2);border:1px solid var(--line);font-family:var(--mono)}
+.chip{font-size:10px;padding:2px 8px;border-radius:20px;background:#fff;font-family:var(--mono)}
 .field{margin-bottom:13px}
 .field label{font-size:12px;font-weight:700;color:var(--ink);display:block;margin-bottom:5px}
-.field input[type=text],.field input[type=number],.field select{width:100%;padding:10px;border:1.5px solid var(--line2);border-radius:9px;font-family:var(--sans);font-size:14px;background:#fff;color:var(--txt)}
+.field input[type=text],.field input[type=number],.field select{width:100%;padding:10px;border:none;border-radius:var(--radius-sm);font-family:var(--sans);font-size:14px;background:#fff;color:var(--txt)}
 .field input[type=range]{width:100%}
 .rangeval{font-family:var(--mono);font-weight:700;color:var(--crimson);float:right}
 .modal-actions{display:flex;gap:9px;margin-top:6px}
 .modal-actions .btn{flex:1}
 .closex{position:absolute;right:14px;top:12px;font-size:22px;color:var(--txt-dim);background:none;border:none;cursor:pointer}
 /* log/news */
-.news{font-size:12px;line-height:1.55;padding:9px 11px;border-left:3px solid var(--gold);background:#fff;border-radius:0 8px 8px 0;margin-bottom:8px;color:var(--txt-paper)}
-.news.bad{border-color:var(--red)} .news.good{border-color:var(--green)}
+.news{font-size:12px;line-height:1.55;padding:10px 12px;background:var(--panel2);border-radius:var(--radius-sm);margin-bottom:8px;color:var(--txt-paper)}
+.news.bad{box-shadow:inset 3px 0 0 var(--red)} .news.good{box-shadow:inset 3px 0 0 var(--green)}
 .news .nt{font-size:9px;color:var(--txt-dim);font-family:var(--mono)}
 /* title screen */
 .title{position:fixed;inset:0;z-index:200;background:
-  radial-gradient(900px 500px at 50% 20%,#262b34,transparent 70%),var(--ink);
+  radial-gradient(900px 500px at 50% 20%,#20242c,transparent 70%),var(--ink);
   display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px;text-align:center}
-.title .big{font-family:var(--serif);font-weight:800;font-size:54px;color:var(--paper);letter-spacing:6px;line-height:1;
-  text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.title .big{font-family:var(--serif);font-weight:800;font-size:52px;color:#fff;letter-spacing:5px;line-height:1;
+  text-shadow:0 4px 24px rgba(0,0,0,.5)}
 .title .big .red{color:var(--crimson-bright)}
 .title .sub2{color:var(--gold-bright);font-family:var(--serif);font-size:14px;letter-spacing:3px;margin-top:14px}
-.title .story{color:#b3ab97;font-size:12.5px;line-height:1.9;margin:26px 0 30px;max-width:340px}
+.title .story{color:#a39c8f;font-size:12.5px;line-height:1.9;margin:26px 0 30px;max-width:340px}
 .title .btn{max-width:300px}
-.divider-jp{color:var(--crimson);font-size:24px;margin:18px 0}
+.divider-jp{color:var(--crimson);font-size:22px;margin:18px 0}
 .scoreflash{font-family:var(--mono);color:var(--gold-bright);font-size:13px;margin-top:14px}
 /* gameover */
 .over .big{font-size:40px}
-.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:400;background:var(--ink2);color:#fff;
-  padding:10px 18px;border-radius:30px;font-size:13px;font-weight:700;border:1px solid var(--gold);
-  box-shadow:0 8px 24px rgba(0,0,0,.5);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:400;background:var(--ink);color:#fff;
+  padding:10px 18px;border-radius:30px;font-size:13px;font-weight:700;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.help{font-size:11px;color:var(--txt-dim);background:#fff;border:1px dashed var(--line2);border-radius:8px;padding:9px;line-height:1.6;margin-top:8px}
+.help{font-size:11px;color:var(--txt-dim);background:var(--panel2);border:none;border-radius:var(--radius-sm);padding:10px;line-height:1.6;margin-top:8px}
 .hbody{font-size:12.5px;color:var(--txt);line-height:1.75;margin:2px 0 14px}
 .hbody p{margin:0 0 12px;padding-bottom:11px;border-bottom:1px solid var(--line)}
 .hbody p:last-child{border-bottom:none}
@@ -308,8 +291,7 @@ table.fs tr.head td{font-family:var(--serif);font-weight:700;color:var(--crimson
 .store.calm .nm::before{background:var(--txt-dim);animation:none;box-shadow:none}
 @keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(63,148,96,.5)}70%{box-shadow:0 0 0 7px rgba(63,148,96,0)}100%{box-shadow:0 0 0 0 rgba(63,148,96,0)}}
 /* ---------- 街マップ（商圏俯瞰）：商店街ストリップ＋シェア番付＋意識層バー ---------- */
-.towncard{padding:12px 12px 13px;background:linear-gradient(180deg,#232c35,#1a2028);border-color:#34404d}
-.towncard::before{opacity:.25}
+.towncard{padding:14px;background:#1e232b}
 .townttl{font-family:var(--serif);font-weight:800;font-size:13.5px;color:#ffe9b8;text-align:center;margin:1px 0 9px;letter-spacing:.4px}
 .townsel{display:flex;gap:5px;overflow-x:auto;margin-bottom:9px;padding-bottom:2px}
 .townsel button{flex:0 0 auto;background:#11151b;border:1px solid #38444f;color:#cdbf9b;font-family:var(--sans);font-size:11px;font-weight:700;padding:5px 10px;border-radius:14px;white-space:nowrap}
@@ -695,7 +677,7 @@ function localCompetitors(s){
     const seats   = 22 + (h%62);                                          // 22〜84席（売り場規模＝魅力度の素）
     const quality = clamp(Math.round(42 + ((Math.floor(h/64))%26) + (l.afflu-1)*7 + (l.comp-1)*5), 34, 74); // 満足度水準
     const dist    = +(0.4 + ((Math.floor(h/4096))%100)/100*2.0).toFixed(2); // 0.4〜2.4（自店からの距離）
-    const rating  = +clamp(2.9 + (quality-42)/32*1.5, 2.9, 4.4).toFixed(2);   // 競合の口コミ評価（質に連動）
+    const rating  = +ratingFromQuality(quality).toFixed(2);                    // 競合の口コミ評価（プレイヤーと同じ分布モデル・質に連動）
     arr.push({name:compName(s,i), seats, quality, dist, rating, flavor:compFlavor(s,i)});
   }
   return arr;
@@ -736,8 +718,17 @@ const DEMAND_SCALE=0.72;     // 規模合わせ（較正用）
 const MAXRES=5000;           // 個別に追跡する住民の上限（代表母集団＝商圏の縮図。性能・セーブ保護）
 // 認知チャネルの強さ（較正用）
 const SIGN_W=46, WOM_W=3.6, PROMO_W=1.4, CHAIN_W=16, COMP_W=2.4, COMP_K=0.012, BUZZ_W=3.6, DISC_W=2.6;
-// 口コミサイト評価（食べログ風 2.9〜4.7）：満足度履歴の加重平均。古い評価は減衰し、改善すれば回復。
-function ratingTarget(sat){ return clamp(2.7 + (clamp(sat,0,100)-32)/58*1.95, 2.6, 4.7); } // sat32→2.7, sat90→4.6
+// 口コミサイト評価（実際の食べログの分布を再現：大半の店が2.8〜3.3に密集し、3.5超は「かなり良い店」、
+// 4.0台は上位ごく僅かな名店級。区間ごとに傾きを変え、上に行くほど頭打ちにする）。
+function ratingFromQuality(sat){
+  const s=clamp(sat,0,100);
+  if(s<=45) return 2.4 + (s/45)*0.5;                 // 0→2.4, 45→2.9
+  if(s<=65) return 2.9 + ((s-45)/20)*0.25;            // 45→2.9, 65→3.15
+  if(s<=80) return 3.15 + ((s-65)/15)*0.30;           // 65→3.15, 80→3.45
+  if(s<=92) return 3.45 + ((s-80)/12)*0.30;           // 80→3.45, 92→3.75
+  return 3.75 + ((s-92)/8)*0.45;                      // 92→3.75, 100→4.20（満点級のみ4以上）
+}
+function ratingTarget(sat){ return ratingFromQuality(sat); } // 互換名（満足度→口コミ目標値）
 function ratingStars(rating){ const r=clamp(rating||0,0,5); const full=Math.floor(r); const half=(r-full)>=0.5?1:0; return '★'.repeat(full)+(half?'⯪':'')+'☆'.repeat(Math.max(0,5-full-half)); }
 // 決定論PRNG（住民属性の再現用）
 function rng32(x){ x=x>>>0; x^=x<<13; x>>>=0; x^=x>>>17; x^=x<<5; return (x>>>0); }
@@ -757,7 +748,9 @@ function personaOf(s,i){
   const dist = Math.sqrt(fr01(base^0xc2b2ae35));          // 0=近所 1=圏端（面積効果で端ほど多い）
   const novelty = frR(base^0x27d4eb2f,0.15,1.0);
   const pickiness = frR(base^0x165667b1,0.78,1.22);
-  return {i, seg, freqMul, priceSens, dist, novelty, pickiness, nameSeed:base};
+  // 個人の「これ以上は払わない」許容価格の壁（Zone of Tolerance）。価格に敏感な人ほど壁は低い。所得が高い立地ほど壁は高い。
+  const priceCeiling = clamp(2.55 - (priceSens-1)*0.85 + (loc(s).afflu-1)*0.5 + frR(base^0x3c6ef372,-0.3,0.3), 1.2, 3.3);
+  return {i, seg, freqMul, priceSens, dist, novelty, pickiness, priceCeiling, nameSeed:base};
 }
 // 住民の表示用プロフィール（名前・年齢。ペルソナ可視化に使用）
 function personaProfile(s,i){
@@ -916,11 +909,12 @@ function newGame(owner, locId, pref, biz, storeName){
   // 店主（主人公）はどの業態でも適性60スタート
   const ownerApt={}; BIZ_KEYS.forEach(k=>ownerApt[k]=60);
   s0.team=[makeEmployee({name:(owner||'店主'),owner:true,age:30,talent:0.55,spec:biz,wage:175,apt:ownerApt})];
-  // 開業資金は業態の規模（capex）と立地家賃に応じてスケール。立ち上げ期（1〜2年の赤字）に耐える運転資金込み。
-  // ラーメン郊外で概ね自己資金1100万＋開業融資900万（＝計2000万）。
+  // 開業資金は業態の規模（capex）と立地家賃に応じてスケール。慎重に待つだけでは逃げ切れない程度に
+  // ランウェイを絞ってある＝序盤にリスクを取って投資・拡大した者だけが生存できる設計。
+  // ラーメン郊外で概ね自己資金780万＋開業融資830万（＝計1610万）。
   const rentMo=Math.round((s0.seats*0.7+8)*loc(s0).rent);
-  const selfFunds=Math.round(Math.max(13000, b.capex*6.2 + rentMo*16));
-  const loanPrin =Math.round(Math.max(10500, b.capex*5.2 + rentMo*13));
+  const selfFunds=Math.round(Math.max(9800, b.capex*4.6 + rentMo*12));
+  const loanPrin =Math.round(Math.max(9200, b.capex*4.1 + rentMo*10.5));
   s0.deposit=Math.round(rentMo*10); // 敷金（資産計上）
   G={
     owner:owner||'店主',
@@ -1225,7 +1219,11 @@ function priceEffects(s){
   const ref = Math.max(0.5, (G.macro&&G.macro.foodLvl)||1);
   const relPrice = avgPrice/ref;
   const el=PRICE_ELAST[s.biz]||1.0;
-  const demandMul = clamp(1 - (relPrice-1)*el*0.72, 0.42, 1.35);
+  // 表示用の目安値（実際の来店計算は住民一人ひとりの効用モデル＝simStore内で個人差込みで計算）。
+  // 平均的な客(priceSens=1.0・許容価格の壁=2.55)を代表値として同じ定価弾力性モデルで概算。人為的な下限は設けない。
+  const _dev=relPrice-1, _eps=el*(_dev>0?3.2:0.95);
+  let demandMul=clamp(Math.pow(Math.max(0.1,relPrice),-_eps),0,4.0);
+  if(relPrice>2.55) demandMul*=Math.exp(-(relPrice-2.55)*2.2);
   return {spendMul, demandMul, avgPrice, relPrice};
 }
 function menuStrength(s){ const it=ensureItems(s); return (it.reduce((a,b)=>a+b,0)/it.length)*20; } // Lv1→20, Lv5→100
@@ -1337,7 +1335,14 @@ function simStore(s, dryRun){
   let demand=0, sumChoose=0;
   for(let k=0;k<n;k++){ const r=s.res[k]; const p=personaOf(s,r.i);
     const fmonth=freq0*p.freqMul;                                            // その人の月間外食回数（食べたい確率）
-    const priceTerm=clamp(1-(relPrice-1)*elas*0.85*p.priceSens,0.12,1.5);     // 価格の手頃感（個人差）
+    // 価格の手頃感＝定価弾力性（isoelastic）需要曲線：Q ∝ relPrice^(-ε)。経済学の標準モデルで、
+    // 競争市場では「設計価格＝ほぼ均衡点」となる（値上げで得をするなら競合が既にそうしている）。
+    // 値上げ方向はプロスペクト理論の損失回避で弾力性が増し（割高感がより強く効く）、
+    // 個人の「これ以上は払わない」許容価格の壁（Zone of Tolerance）を超えると急減衰。下限は設けない。
+    const dev=relPrice-1;
+    const epsEff=elas*p.priceSens*(dev>0?3.2:0.95);
+    let priceTerm=clamp(Math.pow(Math.max(0.1,relPrice),-epsEff),0,4.0);
+    if(relPrice>p.priceCeiling) priceTerm*=Math.exp(-(relPrice-p.priceCeiling)*2.2);
     const distTerm=clamp(1.08-p.dist*0.55,0.45,1.08);                         // 自宅距離（個人差）
     const ownAttr=(0.25+r.af/100)*priceTerm*distTerm*r.aw*ratingTrust;         // 自店の魅力（好感度×価格×近さ×認知×評価）
     const choose=ownAttr/(ownAttr + compPull*COMP_K + 1e-6);                  // ライバルと比べて自店を選ぶ確率
@@ -1868,6 +1873,24 @@ function townShareLegend(s){
    </div>`;
 }
 function setFocus(id){ G._focusStore=id; render(); }
+// 商店街の詳細（商店街ストリップ＋シェア番付＋意識層バー）：ホームから分離した専用ビュー
+function showTownDetail(sid){
+  const s=byId(sid); if(!s) return;
+  let h=`<button class="closex" onclick="closeModal()">×</button><h3>🏘️ ${displayName(s)} の商店街</h3>
+   <div class="sub">商圏の並び＝人気順。店をタップで経営画面へ</div>
+   <div class="towncard" style="border-radius:var(--radius);padding:14px;margin:0 0 14px">
+    <div class="streetwrap">`+shopStreetHTML(s)+`</div>
+    <div class="townsub">あなたの店をタップで経営画面へ</div>
+    `+townShareLegend(s)+`
+    <div class="ot" style="font-weight:700;color:#ffe9b8;margin:12px 0 2px;font-size:12px">📋 商圏シェア番付</div>
+    `+rankLeaderboardHTML(s)+`
+    <div class="ot" style="font-weight:700;color:#ffe9b8;margin:12px 0 2px;font-size:12px">🚶 商圏住民の意識層</div>
+    `+funnelBarHTML(s)+`
+    <div class="townsub">住民は「看板を知る→来店→ファン」と育ちます。<b style="color:#cdbf9b">開業直後は未認知だらけ</b>＝まだ誰も知りません。</div>
+   </div>
+   <button class="btn ghost" onclick="closeModal()">とじる</button>`;
+  openModal(h);
+}
 function showMacro(){ const M=G.macro;
   openModal(`<button class="closex" onclick="closeModal()">×</button><h3>📈 マクロ経済・与信</h3>
    <div class="card" style="margin:0 0 8px">
@@ -1890,20 +1913,24 @@ function viewHome(){
   if(!G._focusStore || !byId(G._focusStore)) G._focusStore=(G.stores[0]||{}).id;
   const fsS=byId(G._focusStore)||G.stores[0];
   let h='';
-  // 街マップ（商圏俯瞰）：商店街ストリップ＋シェア番付＋意識層バー
+  // 商圏スナップショット（簡潔）：詳細は「商店街を見る」で別画面に
   if(fsS){
+    const T=townShares(fsS), you=T.you, cs2=T.cs;
+    const share=Math.round((you?you.share:0)*100), rank=T.list.findIndex(x=>x.oid===fsS.id)+1;
     h+=`<div class="card towncard">`;
     if(G.stores.length>1) h+=`<div class="townsel">`+G.stores.map(o=>`<button class="${o.id===fsS.id?'on':''}" onclick="setFocus('${o.id}')">${BIZ[o.biz].emoji} ${((o.branchLabel||o.name||'')+'').slice(0,6)}</button>`).join('')+`</div>`;
-    h+=`<div class="townttl">🏘️ ${displayName(fsS)} の商店街</div>`;
-    h+=`<div class="streetwrap">`+shopStreetHTML(fsS)+`</div>`;
-    h+=`<div class="townsub">商店街の並び＝人気順。あなたの店をタップで経営画面へ</div>`;
-    h+= townShareLegend(fsS);
-    h+=`<div class="ot" style="font-weight:700;color:#ffe9b8;margin:12px 0 2px;font-size:12px">📋 商圏シェア番付</div>`;
-    h+= rankLeaderboardHTML(fsS);
-    h+=`<div class="ot" style="font-weight:700;color:#ffe9b8;margin:12px 0 2px;font-size:12px">🚶 商圏住民の意識層</div>`;
-    h+= funnelBarHTML(fsS);
-    h+=`<div class="townsub">住民は「看板を知る→来店→ファン」と育ちます。<b style="color:#cdbf9b">開業直後は未認知だらけ</b>＝まだ誰も知りません。</div>`;
-    h+=`</div>`;
+    h+=`<div style="display:flex;align-items:center;gap:14px">
+      <div style="flex:1"><div style="font-size:11px;color:#9a9284">${displayName(fsS)}・商圏シェア</div>
+        <div style="font-family:var(--mono);font-weight:800;font-size:32px;color:#fff;line-height:1.1">${share}<span style="font-size:15px;color:#9a9284">%</span></div>
+        <div style="font-size:11px;color:#9a9284;margin-top:2px">圏内 ${rank}位 / ${T.list.length}店　★${(fsS.rating||3).toFixed(2)}</div></div>
+      <div style="display:flex;flex-direction:column;gap:5px;text-align:right">
+        <div><span style="font-family:var(--mono);font-weight:700;color:#e0c478">${cs2.aware.toLocaleString()}</span><span style="font-size:9.5px;color:#767068"> 認知</span></div>
+        <div><span style="font-family:var(--mono);font-weight:700;color:#7ed9a0">${cs2.tried.toLocaleString()}</span><span style="font-size:9.5px;color:#767068"> 来店</span></div>
+        <div><span style="font-family:var(--mono);font-weight:700;color:#e7897e">${cs2.fans.toLocaleString()}</span><span style="font-size:9.5px;color:#767068"> ファン</span></div>
+      </div>
+    </div>
+    <button class="btn ghost sm" style="margin-top:12px;background:#262c35;color:#e0dccf" onclick="showTownDetail('${fsS.id}')">🏘️ 商店街を見る（競合・シェア番付）</button>
+    </div>`;
   }
   // 資金アラート
   const burn = Math.max(300, Math.round(G.stores.reduce((t,s)=> t + Math.max(0,(s.lastRev||0)-(s.lastProfit||0)), 0)));
@@ -2060,22 +2087,17 @@ function openStore(sid){
   const s=byId(sid); if(!s) return;
   const b=BIZ[s.biz], l=loc(s), r=simStore(s,true);
   const rev=r.revenue||0;
-  const fPct = rev>0? r.cogs/rev*100 : 0;
-  const lPct = rev>0? r.labor/rev*100 : 0;
-  const flPct = fPct+lPct;
-  const flCls = flPct>65?'neg':flPct>58?'':'pos';
   const fs=favStats(s); const fanPct=fs.tot>0?Math.round(fs.fans/fs.tot*100):0;
-  const need=requiredLabor(s), have=laborOnHand(s);
-  const cc=CONCEPTS[s.concept||'standard']; const fit=r.fit||marketFit(s);
-  const teamNames=(s.team||[]).map(m=>m.name+(m.owner?'(店主)':'')).join('、')||'—';
   const trail=s.visitTrail||[]; const trend=trail.length>=2?(trail[trail.length-1]-trail[0]):0;
   const trendCol=trend>0?'var(--green-bright)':trend<0?'var(--red)':'var(--gold)';
+  G._storeTab='overview';
+  const tabs=[['overview','概要'],['customers','顧客'],['rivals','競合'],['manage','経営']];
   let h=`<button class="closex" onclick="closeModal()">×</button>
   <div class="storehero">
     <div class="sicon2">${b.emoji}</div>
     <div class="htxt" style="flex:1;min-width:0">
       <h3>${displayName(s)}</h3>
-      <div class="sub" style="margin-bottom:0;padding-bottom:0;background:none">${l.name}・${b.name}　営業${(s.age/12).toFixed(1)}年</div>
+      <div class="sub" style="margin-bottom:0;padding-bottom:0;border-bottom:none">${l.name}・${b.name}　営業${(s.age/12).toFixed(1)}年</div>
     </div>
     <span class="hanko">★${(s.rating||3).toFixed(2)}</span>
   </div>
@@ -2085,99 +2107,123 @@ function openStore(sid){
     <div class="hk"><div class="lab">満足度</div><div class="val ${s.sat>65?'g':s.sat<45?'r':'gold'}">${s.sat}</div></div>
     <div class="hk"><div class="lab">混雑度</div><div class="val ${r.crowd>1.05?'r':r.crowd>0.85?'gold':'g'}">${Math.round(r.crowd*100)}%</div></div>
   </div>
-  <div class="spark-row" style="margin-bottom:11px">
+  <div class="spark-row" style="margin-bottom:12px">
     <div class="spklab">来店推移（18ヶ月）<br><b style="color:${trendCol}">口コミ ${Math.round(s.reviews||0)}件</b></div>
     ${sparkline(trail.length?trail:[s.lastVisits||0,s.lastVisits||0],130,30,trendCol)}
     <div class="spkval" style="color:var(--txt-paper)">${fanPct}%<div style="font-size:8.5px;color:var(--txt-dim);font-weight:400">ファン比率</div></div>
   </div>
-  <div class="card" style="margin:0 0 10px">
-    ${row('人員 充足',have.toFixed(1)+' / 必要 '+need.toFixed(1), have>=need?'pos':'neg')}
-  </div>
-  <div class="card" style="margin:0 0 10px">
-    ${(()=>{ const vis=s.lastVisits||r.visits||0; const rv=(s.lastRev||rev)||0; const seats=seatsOf(s);
-      const avgSp=vis>0?Math.round(rv*1000/vis):0; const daily=Math.round(vis/26); const turn=seats>0?(vis/(seats*26)):0;
-      const maxTurn=b.turns*(0.8+s.equipLv*0.08); const tcls=turn>=maxTurn*0.95?'neg':turn>=maxTurn*0.7?'':'pos';
-      return row('平均客単価', '¥'+avgSp.toLocaleString())
-        + row('1日あたり来客', daily.toLocaleString()+'人/日')
-        + row('回転率', turn.toFixed(1)+' 回転/日（'+b.name+'の上限 '+maxTurn.toFixed(1)+'）', tcls); })()}
-    <div class="help">回転率＝来客数÷座席数。${b.name}は<b>1日 約${b.turns}回転</b>が上限の目安（食事時間と座席キャパの限界）。これ以上はお客様を捌けず、来店を取りこぼします（席数を増やすか回転の速い業態が必要）。</div>
-  </div>
-  <div class="card" style="margin:0 0 10px">
-    ${(()=>{ const comp=s.lastComposite!=null?s.lastComposite:0; const riv=s.lastRival!=null?s.lastRival:Math.round(rivalSatLevel(s));
-      const win=comp>riv; return `<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:6px">好感度を高める力（嗜好マッチ）</div>`
-      + row('① 店員の業態適性', (s.lastApt!=null?s.lastApt:Math.round(staffAptitude(s)))+' / 100')
-      + row('② 商品クオリティ', (s.lastProd!=null?s.lastProd:'—')+' / 100')
-      + row('③ 商品の地域適性', (s.lastFitScore!=null?s.lastFitScore:'—')+' / 100')
-      + row('体験の質（満足度）→ 好感度の到達点', comp+' / 100','')
-      + row('地域の競合水準（目安）', riv+' / 100','')
-      + row('判定', win?'◎ 競合超え→好感度・ファンが育つ':'△ 競合未満→好感度が伸び悩む', win?'pos':'neg'); })()}
-    <div class="help">来店客の好感度は満足度（＝①店員適性・②商品クオリティ・③地域適性で決まる体験の質）に向かって動きます。総合力が<b>地域の競合水準を上回る</b>ほど高好感度（ファン）が増え、下回ると好感度が下がり離れます。（下の「⚔️ライバル店」は、あなたが名指しした特定の1店との勝負です）</div>
-  </div>
-  <div class="card" style="margin:0 0 10px">
-    ${(()=>{ const cs=custStats(s); const pop=cs.pop;
-      const seg=(lab,val,sub,frac,col)=>`<div class="fn-row"><div class="fn-bar"><i style="width:${clamp(frac*100,1.2,100)}%;background:${col}"></i></div><div class="fn-tx"><span class="fn-lab">${lab}</span><span class="fn-val">${Math.round(val).toLocaleString()}人${sub?'<small> '+sub+'</small>':''}</span></div></div>`;
-      return `<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:8px">🚶 認知ファネル（街の人と自店の関係）</div>`
-       + seg('商圏人口（圏内の住民）', pop, '全員にペルソナがある', 1, 'var(--txt-dim)')
-       + seg('店を知っている', cs.aware, (pop?(cs.aware/pop*100).toFixed(1):0)+'%', cs.aware/pop, 'var(--gold)')
-       + seg('来店したことがある', cs.tried, (cs.aware?Math.round(cs.tried/cs.aware*100):0)+'%が来店', cs.tried/pop, 'var(--green)')
-       + seg('ファン（常連・好感度65+）', cs.fans, (cs.tried?Math.round(cs.fans/Math.max(1,cs.tried)*100):0)+'%が常連化', cs.fans/pop, 'var(--crimson)')
-       + `<div class="help" style="margin-top:7px">街の住民一人ひとりが「看板で知る→来店→満足→常連」と段階を踏みます。<b>開業直後は誰も知りません</b>。満足度を上げ、口コミ・話題で<b>認知</b>を広げ、<b>ファン</b>を増やすほど客足が安定します。</div>`; })()}
-  </div>
-  <div class="card" style="margin:0 0 10px">
-    ${(()=>{ ensureRes(s); const bins=new Array(10).fill(0); s.res.forEach(r=>{ bins[clamp(Math.floor(r.af/10),0,9)]++; }); const mx=Math.max(1,...bins); const cs=custStats(s);
-      let r=`<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:4px">💗 好感度の分布<span class="price" style="font-weight:600">知る人 ${cs.aware.toLocaleString()}人</span></div>`
-        + `<div class="help" style="margin:2px 0 7px">店を知る住民の、あなたへの好感度。右ほどファン。高好感度の人ほど高頻度で来て、競合よりあなたを選びます。平均 <b>${Math.round(cs.avg)}</b>。</div>`
-        + `<div style="display:flex;align-items:flex-end;gap:3px;height:54px">`;
-      for(let bi=0;bi<10;bi++){ const hh=Math.round(bins[bi]/mx*50)+2; const col=bi>=7?'var(--crimson)':bi>=4?'var(--gold)':'var(--txt-dim)';
-        r+=`<div style="flex:1;height:${hh}px;background:${col};border-radius:2px 2px 0 0" title="好感度${bi*10}〜${bi*10+9}：${bins[bi]}人"></div>`; }
-      r+=`</div><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--txt-dim);margin-top:2px"><span>嫌い 0</span><span>50</span><span>100 大ファン</span></div>`;
-      return r; })()}
-  </div>
-  <div class="card" style="margin:0 0 10px">
-    ${(()=>{ ensureRes(s);
-      let r=`<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:6px">🧑‍🤝‍🧑 お客様の顔ぶれ<span class="price" style="font-weight:600">${s.res.length.toLocaleString()}人と関係</span></div>`;
-      if(!s.res.length){ r+=`<div class="muted">まだ誰もあなたの店を知りません。営業を続け、看板・口コミで広めましょう。</div>`; }
-      else{ sampleRes(s,5).forEach(r2=>{ r+=residentCardHTML(s,r2); });
-        r+=`<button class="btn ghost sm" style="margin-top:5px" onclick="browseResidents('${s.id}')">街の住民をもっと見る ›</button>`; }
-      return r; })()}
-  </div>
-  ${rivalCardHTML(s)}
-  <div class="card" style="margin:0 0 10px">
-    ${(()=>{ const comps=localCompetitors(s).slice().sort((a,b)=>b.quality-a.quality); const pNew=s.lastShare!=null?s.lastShare:0;
-      let r=`<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:4px">🏪 商圏の競合店一覧</div>`
-        + row('住民が自店を選ぶ平均確率', (pNew*100).toFixed(1)+'%', pNew>=0.22?'pos':pNew<0.08?'neg':'')
-        + `<div class="help" style="margin:4px 0 6px">住民は「自店の魅力 ÷（自店＋競合の魅力）」で来店先を選びます。魅力＝好感度×価格の手頃感×近さ。満足度を上げ価格を磨くほど、競合より選ばれます。</div>`
-        + `<table class="fs"><tr><th style="text-align:left">店</th><th class="num">席</th><th class="num">満足度水準</th><th class="num">距離</th></tr>`;
-      comps.forEach(c=>{ r+=`<tr><td>${c.name}</td><td class="num">${c.seats}</td><td class="num">${c.quality}</td><td class="num">${c.dist}km</td></tr>`; });
-      r+=`<tr style="border-top:2px solid var(--line2)"><td><b>自店（${displayName(s)}）</b></td><td class="num">${seatsOf(s)}</td><td class="num" style="color:var(--crimson);font-weight:700">${Math.round(s.sat||52)}</td><td class="num">—</td></tr></table>`;
-      return r; })()}
-  </div>
-  <div class="card" style="margin:0 0 10px">
-    ${row('商品コンセプト', cc.emoji+' '+cc.name)}
-    ${row('商圏との相性', fitLabel(fit), fit>=1.02?'pos':fit<0.86?'neg':'')}
-    <div class="help">この立地の客層に対する現コンセプトの相性です。合わなければ「メニュー開発」で方向転換を。</div>
-  </div>
-  <div class="card" style="margin:0 0 10px">
-    <div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:6px">FLコスト（売上比）</div>
-    ${row('F：食材原価', fPct.toFixed(1)+'%')}
-    ${row('L：人件費', lPct.toFixed(1)+'%')}
-    ${row('FL合計', flPct.toFixed(1)+'%', flCls)}
-    <div class="help">外食では<b>FL比率60%以下</b>が健全の目安。65%を超えると利益が出にくく危険水域です。</div>
-  </div>
-  <div class="muted" style="margin-bottom:8px">座席 ${seatsOf(s)}席・社員：${teamNames}　｜　アルバイト${s.staffPart}名・設備Lv${s.equipLv}・${s.ownsLand?'自社物件':'賃借'}</div>
-  <div class="opt" onclick="storePL('${s.id}')"><div class="ot">📊 この店の損益計算書（直近月）<span class="price">店舗別P/L</span></div></div>
-  <div class="opt" onclick="doMenu('${s.id}')"><div class="ot">🍳 メニュー開発 / 新商品<span class="price">方向性で伸び方が変わる</span></div></div>
-  <div class="opt" onclick="doHire('${s.id}')"><div class="ot">🧑‍🍳 採用 / 人員調整<span class="price">サービス↑</span></div></div>
-  <div class="opt" onclick="doTrain('${s.id}')"><div class="ot">📚 人材育成<span class="price">スキル↑</span></div></div>
-  <div class="opt" onclick="doEquip('${s.id}')"><div class="ot">🔧 設備更新<span class="price">キャパ・満足度↑</span></div></div>`;
-  if(!s.ownsLand){
-    const price=Math.round(landPriceOf(l,b,s.parking)*(1+G.macro.cycle*0.1));
-    h+=`<div class="opt" onclick="doBuyOne('${s.id}',${price})"><div class="ot">🏗️ この物件を取得<span class="price">${yen(price*1000)}</span></div><div class="od">家賃 ${yen(storeRent(s)*1000)}/月 → ¥0（資産は手元に残る）。${price<=maxBorrow('re')?'担保設定で低金利の不動産融資も可（'+(loanRate('re')*100).toFixed(2)+'%）':''}</div></div>`;
-  }
-  if(G.stores.length>1){
-    h+=`<div class="opt" style="border-color:rgba(156,42,42,.4)" onclick="confirmCloseStore('${s.id}')"><div class="ot" style="color:var(--crimson)">🚪 この店を閉店（撤退）<span class="price">${(s.team||[]).filter(m=>!m.owner).length>0?'社員は待機へ':'店主のみ'}</span></div><div class="od">設備は除却損、敷金は一部返還。${(s.team||[]).filter(m=>!m.owner).length>0?'<b>社員は同時に解雇できず</b>、待機人員として給与が発生し続けます（他店へ異動か、退職金を払って整理）。':''}</div></div>`;
-  }
+  <div class="seg" id="storeSegWrap">`+tabs.map(([k,lab])=>`<button class="${k==='overview'?'on':''}" onclick="storeTab('${sid}','${k}',this)">${lab}</button>`).join('')+`</div>
+  <div id="storeBody"></div>`;
   openModal(h);
+  renderStoreTab(sid,'overview');
+}
+function storeTab(sid,t,btn){ G._storeTab=t; document.querySelectorAll('#storeSegWrap button').forEach(b=>b.classList.remove('on')); if(btn)btn.classList.add('on'); renderStoreTab(sid,t); }
+function renderStoreTab(sid,tab){
+  const el=$('storeBody'); if(!el) return;
+  const s=byId(sid); if(!s) return;
+  const b=BIZ[s.biz], l=loc(s), r=simStore(s,true);
+  const rev=r.revenue||0;
+  const need=requiredLabor(s), have=laborOnHand(s);
+  let h='';
+  if(tab==='overview'){
+    const fPct = rev>0? r.cogs/rev*100 : 0;
+    const lPct = rev>0? r.labor/rev*100 : 0;
+    const flPct = fPct+lPct;
+    const flCls = flPct>65?'neg':flPct>58?'':'pos';
+    const teamNames=(s.team||[]).map(m=>m.name+(m.owner?'(店主)':'')).join('、')||'—';
+    h+=`<div class="card" style="margin:0 0 10px">
+      ${row('人員 充足',have.toFixed(1)+' / 必要 '+need.toFixed(1), have>=need?'pos':'neg')}
+    </div>
+    <div class="card" style="margin:0 0 10px">
+      ${(()=>{ const vis=s.lastVisits||r.visits||0; const rv=(s.lastRev||rev)||0; const seats=seatsOf(s);
+        const avgSp=vis>0?Math.round(rv*1000/vis):0; const daily=Math.round(vis/26); const turn=seats>0?(vis/(seats*26)):0;
+        const maxTurn=b.turns*(0.8+s.equipLv*0.08); const tcls=turn>=maxTurn*0.95?'neg':turn>=maxTurn*0.7?'':'pos';
+        return row('平均客単価', '¥'+avgSp.toLocaleString())
+          + row('1日あたり来客', daily.toLocaleString()+'人/日')
+          + row('回転率', turn.toFixed(1)+' 回転/日（'+b.name+'の上限 '+maxTurn.toFixed(1)+'）', tcls); })()}
+      <div class="help">回転率＝来客数÷座席数。${b.name}は<b>1日 約${b.turns}回転</b>が上限の目安。これ以上はお客様を捌けず、来店を取りこぼします（席数を増やすか回転の速い業態が必要）。</div>
+    </div>
+    <div class="card" style="margin:0 0 10px">
+      <div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:6px">FLコスト（売上比）</div>
+      ${row('F：食材原価', fPct.toFixed(1)+'%')}
+      ${row('L：人件費', lPct.toFixed(1)+'%')}
+      ${row('FL合計', flPct.toFixed(1)+'%', flCls)}
+      <div class="help">外食では<b>FL比率60%以下</b>が健全の目安。65%を超えると利益が出にくく危険水域です。</div>
+    </div>
+    <div class="muted" style="margin-bottom:2px">座席 ${seatsOf(s)}席・社員：${teamNames}　｜　アルバイト${s.staffPart}名・設備Lv${s.equipLv}・${s.ownsLand?'自社物件':'賃借'}</div>`;
+  } else if(tab==='customers'){
+    const cc=CONCEPTS[s.concept||'standard']; const fit=r.fit||marketFit(s);
+    h+=`<div class="card" style="margin:0 0 10px">
+      ${(()=>{ const cs=custStats(s); const pop=cs.pop;
+        const seg=(lab,val,sub,frac,col)=>`<div class="fn-row"><div class="fn-bar"><i style="width:${clamp(frac*100,1.2,100)}%;background:${col}"></i></div><div class="fn-tx"><span class="fn-lab">${lab}</span><span class="fn-val">${Math.round(val).toLocaleString()}人${sub?'<small> '+sub+'</small>':''}</span></div></div>`;
+        return `<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:8px">🚶 認知ファネル（街の人と自店の関係）</div>`
+         + seg('商圏人口（圏内の住民）', pop, '全員にペルソナがある', 1, 'var(--txt-dim)')
+         + seg('店を知っている', cs.aware, (pop?(cs.aware/pop*100).toFixed(1):0)+'%', cs.aware/pop, 'var(--gold)')
+         + seg('来店したことがある', cs.tried, (cs.aware?Math.round(cs.tried/cs.aware*100):0)+'%が来店', cs.tried/pop, 'var(--green)')
+         + seg('ファン（常連・好感度65+）', cs.fans, (cs.tried?Math.round(cs.fans/Math.max(1,cs.tried)*100):0)+'%が常連化', cs.fans/pop, 'var(--crimson)')
+         + `<div class="help" style="margin-top:7px">「看板で知る→来店→満足→常連」と段階を踏みます。<b>開業直後は誰も知りません</b>。満足度・口コミ・話題で<b>認知</b>を広げるほど客足が安定します。</div>`; })()}
+    </div>
+    <div class="card" style="margin:0 0 10px">
+      ${(()=>{ ensureRes(s); const bins=new Array(10).fill(0); s.res.forEach(r=>{ bins[clamp(Math.floor(r.af/10),0,9)]++; }); const mx=Math.max(1,...bins); const cs=custStats(s);
+        let rr=`<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:4px">💗 好感度の分布<span class="price" style="font-weight:600">知る人 ${cs.aware.toLocaleString()}人</span></div>`
+          + `<div class="help" style="margin:2px 0 7px">高好感度の人ほど高頻度で来て、競合よりあなたを選びます。平均 <b>${Math.round(cs.avg)}</b>。</div>`
+          + `<div style="display:flex;align-items:flex-end;gap:3px;height:54px">`;
+        for(let bi=0;bi<10;bi++){ const hh=Math.round(bins[bi]/mx*50)+2; const col=bi>=7?'var(--crimson)':bi>=4?'var(--gold)':'var(--txt-dim)';
+          rr+=`<div style="flex:1;height:${hh}px;background:${col};border-radius:2px 2px 0 0" title="好感度${bi*10}〜${bi*10+9}：${bins[bi]}人"></div>`; }
+        rr+=`</div><div style="display:flex;justify-content:space-between;font-size:9px;color:var(--txt-dim);margin-top:2px"><span>嫌い 0</span><span>50</span><span>100 大ファン</span></div>`;
+        return rr; })()}
+    </div>
+    <div class="card" style="margin:0 0 10px">
+      ${(()=>{ ensureRes(s);
+        let rr=`<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:6px">🧑‍🤝‍🧑 お客様の顔ぶれ<span class="price" style="font-weight:600">${s.res.length.toLocaleString()}人と関係</span></div>`;
+        if(!s.res.length){ rr+=`<div class="muted">まだ誰もあなたの店を知りません。営業を続け、看板・口コミで広めましょう。</div>`; }
+        else{ sampleRes(s,5).forEach(r2=>{ rr+=residentCardHTML(s,r2); });
+          rr+=`<button class="btn ghost sm" style="margin-top:5px" onclick="browseResidents('${s.id}')">街の住民をもっと見る ›</button>`; }
+        return rr; })()}
+    </div>
+    <div class="card" style="margin:0 0 10px">
+      ${(()=>{ const comp=s.lastComposite!=null?s.lastComposite:0; const riv=s.lastRival!=null?s.lastRival:Math.round(rivalSatLevel(s));
+        const win=comp>riv; return `<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:6px">好感度を高める力（嗜好マッチ）</div>`
+        + row('① 店員の業態適性', (s.lastApt!=null?s.lastApt:Math.round(staffAptitude(s)))+' / 100')
+        + row('② 商品クオリティ', (s.lastProd!=null?s.lastProd:'—')+' / 100')
+        + row('③ 商品の地域適性', (s.lastFitScore!=null?s.lastFitScore:'—')+' / 100')
+        + row('体験の質（満足度）→ 好感度の到達点', comp+' / 100','')
+        + row('地域の競合水準（目安）', riv+' / 100','')
+        + row('判定', win?'◎ 競合超え→好感度・ファンが育つ':'△ 競合未満→好感度が伸び悩む', win?'pos':'neg'); })()}
+      <div class="help">総合力が<b>地域の競合水準</b>を上回るほど高好感度（ファン）が増え、下回ると離れます。</div>
+    </div>
+    <div class="card" style="margin:0 0 10px">
+      ${row('商品コンセプト', cc.emoji+' '+cc.name)}
+      ${row('商圏との相性', fitLabel(fit), fit>=1.02?'pos':fit<0.86?'neg':'')}
+      <div class="help">この立地の客層に対する現コンセプトの相性です。合わなければ「メニュー開発」で方向転換を。</div>
+    </div>`;
+  } else if(tab==='rivals'){
+    h+=rivalCardHTML(s);
+    h+=`<div class="card" style="margin:0 0 10px">
+      ${(()=>{ const comps=localCompetitors(s).slice().sort((a,b)=>b.quality-a.quality); const pNew=s.lastShare!=null?s.lastShare:0;
+        let rr=`<div class="ot" style="font-weight:700;color:var(--ink);margin-bottom:4px">🏪 商圏の競合店一覧</div>`
+          + row('住民が自店を選ぶ平均確率', (pNew*100).toFixed(1)+'%', pNew>=0.22?'pos':pNew<0.08?'neg':'')
+          + `<div class="help" style="margin:4px 0 6px">住民は「自店の魅力 ÷（自店＋競合の魅力）」で来店先を選びます。魅力＝好感度×価格の手頃感×近さ。</div>`
+          + `<table class="fs"><tr><th style="text-align:left">店</th><th class="num">席</th><th class="num">満足度水準</th><th class="num">距離</th></tr>`;
+        comps.forEach(c=>{ rr+=`<tr><td>${c.name}</td><td class="num">${c.seats}</td><td class="num">${c.quality}</td><td class="num">${c.dist}km</td></tr>`; });
+        rr+=`<tr style="border-top:2px solid var(--line2)"><td><b>自店（${displayName(s)}）</b></td><td class="num">${seatsOf(s)}</td><td class="num" style="color:var(--crimson);font-weight:700">${Math.round(s.sat||52)}</td><td class="num">—</td></tr></table>`;
+        return rr; })()}
+    </div>`;
+  } else if(tab==='manage'){
+    h+=`<div class="opt" onclick="storePL('${s.id}')"><div class="ot">📊 この店の損益計算書（直近月）<span class="price">店舗別P/L</span></div></div>
+    <div class="opt" onclick="doMenu('${s.id}')"><div class="ot">🍳 メニュー開発 / 新商品<span class="price">方向性で伸び方が変わる</span></div></div>
+    <div class="opt" onclick="doHire('${s.id}')"><div class="ot">🧑‍🍳 採用 / 人員調整<span class="price">サービス↑</span></div></div>
+    <div class="opt" onclick="doTrain('${s.id}')"><div class="ot">📚 人材育成<span class="price">スキル↑</span></div></div>
+    <div class="opt" onclick="doEquip('${s.id}')"><div class="ot">🔧 設備更新<span class="price">キャパ・満足度↑</span></div></div>`;
+    if(!s.ownsLand){
+      const price=Math.round(landPriceOf(l,b,s.parking)*(1+G.macro.cycle*0.1));
+      h+=`<div class="opt" onclick="doBuyOne('${s.id}',${price})"><div class="ot">🏗️ この物件を取得<span class="price">${yen(price*1000)}</span></div><div class="od">家賃 ${yen(storeRent(s)*1000)}/月 → ¥0（資産は手元に残る）。${price<=maxBorrow('re')?'担保設定で低金利の不動産融資も可（'+(loanRate('re')*100).toFixed(2)+'%）':''}</div></div>`;
+    }
+    if(G.stores.length>1){
+      h+=`<div class="opt" style="border-color:rgba(156,42,42,.4)" onclick="confirmCloseStore('${s.id}')"><div class="ot" style="color:var(--crimson)">🚪 この店を閉店（撤退）<span class="price">${(s.team||[]).filter(m=>!m.owner).length>0?'社員は待機へ':'店主のみ'}</span></div><div class="od">設備は除却損、敷金は一部返還。${(s.team||[]).filter(m=>!m.owner).length>0?'<b>社員は同時に解雇できず</b>、待機人員として給与が発生し続けます（他店へ異動か、退職金を払って整理）。':''}</div></div>`;
+    }
+  }
+  el.innerHTML=h;
 }
 function confirmCloseStore(sid){
   const s=byId(sid); if(!s)return; const movable=(s.team||[]).filter(m=>!m.owner);
@@ -2508,8 +2554,10 @@ function doMenu(sid){ const s=byId(sid); const b=BIZ[s.biz], l=loc(s);
   } else {
     h+=`<div class="muted" style="margin:12px 0 6px">② メニュー品目・価格設定（注文数でレベルUP：1000注文/店、強化は500／店）</div>`;
   }
-  h+=`<div class="card" style="margin:0 0 8px;padding:8px 12px">${row('実効客単価',`基準比 ×${pe.spendMul.toFixed(2)}`, pe.spendMul>=1.0?'pos':'neg')}${row('物価対比の価格水準',`×${pe.relPrice.toFixed(2)}`, pe.relPrice>=1.15?'neg':pe.relPrice<=0.9?'pos':'')}${row('価格による来客変化',`×${pe.demandMul.toFixed(2)}`, pe.demandMul>=0.99?'pos':'neg')}
-    <div class="help" style="margin-top:4px">価格は<b>あなたが決めます</b>（物価で勝手には上がりません）。需要は<b>物価対比</b>で決まり、インフレに合わせて値上げすれば中立、据え置けば割安で客は増えるが原価高で粗利が圧迫されます。現在の食材物価指数 ×${((G.macro&&G.macro.foodLvl)||1).toFixed(2)}。弾力性は${PRICE_ELAST[s.biz]>=1.3?'高い（敏感）':PRICE_ELAST[s.biz]>=1.1?'やや敏感':'鈍感'}。</div>
+  h+=`<div class="card" style="margin:0 0 8px;padding:8px 12px">${row('実効客単価',`基準比 ×${pe.spendMul.toFixed(2)}`, pe.spendMul>=1.0?'pos':'neg')}${row('物価対比の価格水準',`×${pe.relPrice.toFixed(2)}`, pe.relPrice>=1.15?'neg':pe.relPrice<=0.9?'pos':'')}${row('価格による来客変化（目安）',`×${pe.demandMul.toFixed(3)}`, pe.demandMul>=0.99?'pos':'neg')}
+    <div class="help" style="margin-top:4px">価格は<b>あなたが決めます</b>。需要は住民一人ひとりの<b>心理モデル</b>で決まります：①<b>値上げは値下げより効く</b>（損失回避）②割高になるほど選ばれにくくなり<b>人為的な下限はありません</b>（極端な値上げは客を大きく遠ざけます）③人ごとに「これ以上は払わない」<b>許容価格の壁</b>があり、超えると急に離れます。現在の食材物価指数 ×${((G.macro&&G.macro.foodLvl)||1).toFixed(2)}。弾力性は${PRICE_ELAST[s.biz]>=1.3?'高い（敏感）':PRICE_ELAST[s.biz]>=1.1?'やや敏感':'鈍感'}。
+    ${(()=>{ const cr=(s.lastCrowd!=null?s.lastCrowd:0); return cr>1.02? `<br><b style="color:var(--crimson)">⚠ 現在 混雑度${Math.round(cr*100)}%（満席）</b>：席数が上限のため、値下げしても来店数はすぐには増えません。値上げは待ち時間の解消と利益率アップに使えます（客数が減り始めるまで実質「無料の値上げ余地」があります）。` : ''; })()}
+    </div>
     <div style="display:flex;gap:6px;margin-top:6px"><button class="btn ghost sm" style="flex:1" onclick="adjAllPrices('${sid}',-1)">全品 −5%</button><button class="btn ghost sm" style="flex:1" onclick="adjAllPrices('${sid}',1)">全品 +5%</button></div></div>`;
   names.forEach((nm,i)=>{ const lv=items[i]; const isFeat=host.featured===i;
     const th=(isFeat?500:1000)*Math.max(1,stores); const prog=lv>=5?100:Math.round(((host.orders[i]||0)/th)*100);
@@ -3319,7 +3367,7 @@ function renderStartModal(){
     h+=`</select></div>`;
   }
   h+=`<div class="card" style="margin:6px 0 8px">${row('本店',(isGen&&__startPref?`${__startPref}・${l.name.replace('地方都市・','').replace('地方','')}`:l.name))}${row('初期家賃概算',yen(rentNow*1000)+'/月')}${row('商圏規模',l.market.toFixed(2)+'倍')}${row('通行量',l.traffic.toFixed(2)+'倍')}${row('競合の多さ',l.comp.toFixed(2)+'倍')}${row('所得水準',l.afflu.toFixed(2)+'倍')}</div>
-   <div class="help">あなたは30歳。修行を終えて独立します。自己資金＋開業融資で計2000万円前後（業態・立地で変動）。<b>開業直後は誰も店を知りません</b>。看板を見た数人から口コミでじわ"じわ"と知名度を広げ、満足度を上げてファンを増やすのが立ち上げの肝。都心は商圏が大きいが家賃も競合も重い。地方は家賃が軽いが商圏も小さい。立ち上げ期は赤字が続くので<b>運転資金（ランウェイ）</b>を意識して。40年でどこまで純資産を築けるか。</div>
+   <div class="help">あなたは30歳。修行を終えて独立します。自己資金＋開業融資で計1600万円前後（業態・立地で変動）——<b>安全策に頼りきるには心もとない額</b>です。開業直後は誰も店を知りません。看板を見た数人から口コミでじわ"じわ"と知名度を広げ、満足度を上げてファンを増やすのが立ち上げの肝。都心は商圏が大きいが家賃も競合も重い。地方は家賃が軽いが商圏も小さい。<b>証拠が出るまで様子見を続けると資金が先に尽きます</b>。ある程度リスクを取って早めに投資・拡張する店だけが軌道に乗れます。40年でどこまで純資産を築けるか。</div>
    <button class="btn primary" onclick="confirmNew()">この内容で開業する</button>
    <div style="height:8px"></div>
    <button class="btn ghost" onclick="showHelp()">先に遊び方を読む</button>`;
@@ -3433,7 +3481,7 @@ function showHelp(){
    ・<b>開業直後は誰もあなたの店を知りません</b>。店前を通って看板を見た数人からスタート。<br>
    ・各住民は段階を踏みます：<b>看板で知る → 来店する → 満足する → 常連・ファンになる</b>。<br>
    ・<b>認知</b>は「看板（通行量）」「<b>口コミ</b>（ファンが増えるほど加速）」「<b>賑わい・話題</b>（繁盛店ほど目を引く）」「販促」で広がります。満足度が低い店は良い評判が立たず新規客が寄り付きません。<br>
-   ・来店先は「<b>自店の魅力 ÷（自店＋競合の魅力）</b>」で選ばれます。魅力＝<b>好感度 × 価格の手頃感 × 近さ</b>。<br>
+   ・来店先は「<b>自店の魅力 ÷（自店＋競合の魅力）</b>」で選ばれます。魅力＝<b>好感度 × 価格の手頃感 × 近さ</b>。価格の手頃感は現実の消費者行動と同じ心理モデル：値上げは値下げより強く効き（<b>損失回避</b>）、人ごとに「これ以上は払わない」<b>許容価格の壁</b>があり、割高になるほど<b>下限なく</b>客を遠ざけます。ただし<b>満席（混雑度100%超）</b>のときは値下げしても供給（席数）が足りず来店数はすぐには増えません。<br>
    ・来店して<b>満足度</b>が高いほど好感度が上がり（通うほど愛着も増しファン化）、低いと下がって離れます。ファンは高頻度で通い、友人に口コミします。<br>
    ・満足度は「<b>サービス（人員×スキル）</b>」「<b>商品力（メニュー×設備×スキル）</b>」「<b>混雑度（待ち時間）</b>」で決まります。<br>
    → だから立ち上げは<b>本当にシビア</b>。良い体験を積んで口コミの好循環（Jカーブ）に乗せるまで、赤字に耐える資金が要ります。</p>
@@ -3445,7 +3493,9 @@ function showHelp(){
    ・同一業態を増やすと<b>ブランド認知</b>で新店の客付きが速くなります。<br>
    ・不動産は「取得」で家賃ゼロにできますが、現金が固定化します。</p>
    <p><b>■ ゲームオーバー</b><br><b>現預金がマイナスになった時点で即・倒産</b>です（当座貸越なし）。黒字でも元金返済や出店で現金が尽きる「黒字倒産」に要注意。現金残高と月の支出（ランウェイ）を常に意識し、現金が薄くなったら運転資金の借入・経費削減・出店ペースの抑制を。40年完走でクリアです。</p>
-   <p><b>■ 序盤のコツ</b><br>開業直後は<b>1日数人</b>からのスタート。焦って人を雇いすぎず固定費を抑え、まず1号店の<b>満足度</b>を上げて来た客をファンに変えること。ファンが増えると<b>口コミ・話題</b>で認知が加速し、ある時点から客足が一気に伸びます（Jカーブ）。黒字化→現金を厚く→<b>DSCRに余裕</b>がある範囲で慎重に2号店。<b>立ち上げの赤字を支える運転資金</b>を切らさないことが最重要。最初から急拡大すると一発で資金ショートします。</p>
+   <p><b>■ 序盤のコツ（重要：安全策だけでは生き残れません）</b><br>開業直後は<b>1日数人</b>からのスタート。開業資金は<b>証拠が出るまで様子見を続けるには心もとない額</b>に設定されています。まず1号店の<b>満足度</b>を上げて来た客をファンに変えること。ファンが増えると<b>口コミ・話題</b>で認知が加速し、ある時点から客足が一気に伸びます（Jカーブ）——ですが、<b>需要が証明されるのを待ってから設備投資・増員に動くと、点火する前にランウェイが尽きます</b>。<br>
+   ・<b>ある程度リスクを取り、序盤から借入で設備投資・増員に踏み切る店ほど生存率が高い</b>のが実測での傾向です。混雑度が100%に近づいたら、黒字化を待たず<b>設備資金の融資</b>を使って先回りで拡張しましょう。<br>
+   ・ただし無計画な借入は禁物。<b>DSCR</b>（営業CF÷返済額）が1.0を割ると返済原資が不足します。「リスクを取る」＝「勝算のある賭けに出る」であって、無謀な放漫経営ではありません。</p>
    <p><b>■ セーブ</b><br><b>自動保存</b>（毎月・各操作ごと）。右上「≡ メニュー」から手動セーブ・ロード・タイトルへ戻る・やり直しができます。</p>
   </div>
   <button class="btn primary" onclick="closeModal()">とじる</button>`);
